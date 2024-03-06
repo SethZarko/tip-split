@@ -19,6 +19,7 @@ import { UserProfile } from './pages/UserProfile.jsx'
 
 // BasicUser Pages
 import { Login } from './pages/Login.jsx'
+import { Register } from './pages/Register.jsx'
 
 // Components
 import { NotFound } from './components/NotFound.jsx'
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<BasicUserLayout/>}>
         <Route index element={<Home/>}/>
         <Route path='login' element={<Login/>}/>
+        <Route path='register' element={<Register/>}/>
 
         <Route path='*' element={<NotFound/>}/>
       </Route>
