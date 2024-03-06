@@ -1,6 +1,7 @@
 import { useAppContext } from "../context/AppProvider"        
 
 // Components
+import { Bill } from '../components/Bill.jsx'
 
 export const Home = () => {
     const { token } = useAppContext()
@@ -13,7 +14,7 @@ export const Home = () => {
                 </>
             ) : (
                 <>
-                
+                    <Bill/>
                 </>
             )}
         </section>

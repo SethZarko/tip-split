@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root {
+    --app-background: rgb(147, 202, 207);
+    --app-background-light: rgba(147, 202, 207, 0.15);
+    --primary-text-color: rgb(28, 51, 45);
+    --primary-text-color-light: rgba(28, 51, 45, 0.35);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +14,7 @@
 }
 
 #root {
-    background: rgb(147, 202, 207);
+    background: var(--app-background);
     width: 100%;
     min-height: 100vh;
     margin: 0 auto;
@@ -20,7 +27,7 @@ a {
 .logo {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
-    color: rgb(28, 51, 45);
+    color: var(--primary-text-color);
     letter-spacing: 10px;
     width: 100%;
     text-align: left;
@@ -38,3 +45,62 @@ main {
 
 /* Home Page */
 
+#home {
+    width: 99%;
+    max-width: 850px;
+    background: rgb(250, 250, 250);
+    border: solid 1px rgb(250, 250, 250);
+    border-radius: 10px;
+    padding: 1.35em;
+    box-shadow: 0 0 6px 1px lightgrey;
+}
+
+#bill {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    position: relative;
+}
+
+#bill label {
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-text-color);
+    margin-left: 0.5em;
+}
+
+#bill input {
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    width: 90%;
+    padding: .75em;
+    border: none;
+    border-radius: 8px;
+    margin: 0.5em auto;
+    background: var(--app-background-light);
+    text-align: right;
+    color: var(--primary-text-color);
+}
+
+#bill input::placeholder {
+    font-family: 'Raleway', sans-serif;
+    font-size: .75rem;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+#bill::before {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    content: '$';
+    display: inline-block;
+    width: 10px;
+    height: 2px;
+    color: var(--primary-text-color-light);
+    position: absolute;
+    top: 42px;
+    left: 45px;
+}
