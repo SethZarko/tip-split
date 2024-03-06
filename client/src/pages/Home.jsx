@@ -1,8 +1,21 @@
-                                          
+import { useAppContext } from "../context/AppProvider"        
+
+// Components
+
 export const Home = () => {
+    const { token } = useAppContext()
+
     return (
-        <div>
-              
-        </div>
+        <section id='home'>
+            {token ? ( 
+                <>
+                
+                </>
+            ) : (
+                <>
+                
+                </>
+            )}
+        </section>
     )
 }
