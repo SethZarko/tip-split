@@ -7,6 +7,9 @@ export const BasicUserLayout = () => {
 
     return (
         <main>
+            <div className="logo-container">
+                <h1 className='logo'>SPLI<br/>TTER</h1>
+            </div>
             {!token ? <Outlet/> : <Navigate to='/pro/home'/>}    
         </main>
     )
