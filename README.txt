@@ -22,4 +22,8 @@ The advance or pro features will allow the user to:
 5. All for tip and bill percentage allocation to each customer
 6. Save, store, and delete calculated tip slips in a user profile 
 
+Dependencies:
 
+React Router Dom
+Axios
+Formik / Yup
