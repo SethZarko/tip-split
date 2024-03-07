@@ -7,7 +7,7 @@ const AppContext = createContext({
     user: null,
     token: null,
     setUser: () => {},
-    setToken: () => {},
+    _setToken: () => {},
 })
 
 // Context Provider
@@ -15,7 +15,11 @@ export const AppProvider = ({ children }) => {
 
     // Context State
     const [user, setUser] = useState([])
-    const [token, _setToken ] = useState(localStorage.getItem('ACCESS_TOKEN'))
+    // const [token, _setToken ] = useState(localStorage.getItem('ACCESS_TOKEN'))
+    const [token, _setToken ] = useState(false)
+    console.log('User Token:', token);
+
+    const [billFormData, setBillFormData] = useState({ bill: '' })
 
     // Context Methods
     const setToken = (token) => {
@@ -28,12 +32,15 @@ export const AppProvider = ({ children }) => {
         }
     }
 
+
     // Context Object
     const contextValue = {
         user,
         token,
         setUser,
         setToken,
+        billFormData,
+        setBillFormData
     }
 
     // Return Context

@@ -24,6 +24,15 @@ a {
     text-decoration: none;
 }
 
+main {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .logo {
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
@@ -32,15 +41,6 @@ a {
     width: 100%;
     text-align: left;
     padding: 2em;
-}
-
-main {
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
 }
 
 /* Home Page */
@@ -71,9 +71,6 @@ main {
 }
 
 #bill input {
-    font-family: 'Nanum Gothic Coding', sans-serif;
-    font-weight: 700;
-    font-size: 1.25rem;
     width: 90%;
     padding: .75em;
     border: none;
@@ -81,7 +78,7 @@ main {
     margin: 0.5em auto;
     background: var(--app-background-light);
     text-align: right;
-    color: var(--primary-text-color);
+    color: transparent;
 }
 
 #bill input::placeholder {
@@ -90,6 +87,7 @@ main {
     letter-spacing: 1px;
     text-align: left;
 }
+
 
 #bill::before {
     font-family: 'Raleway', sans-serif;
@@ -101,6 +99,16 @@ main {
     height: 2px;
     color: var(--primary-text-color-light);
     position: absolute;
-    top: 42px;
-    left: 45px;
+    top: 32px;
+    left: 35px;
+}
+
+.cleaned-input {
+    position: absolute;
+    top: 35px;
+    left: 165px;
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-text-color);
 }

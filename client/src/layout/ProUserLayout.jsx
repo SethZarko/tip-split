@@ -7,7 +7,9 @@ export const ProUserLayout = () => {
 
     return (
         <main>
-            <h1 className='logo'>SPLITTER</h1>
+            <div className="logo-container">
+                <h1 className='logo'>SPLI<br/>TTER</h1>
+            </div>
             {token ? <Outlet/> : <Navigate to='/'/>}    
         </main>
     )
