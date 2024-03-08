@@ -104,10 +104,15 @@ export const Home = () => {
         </>
       ) : (
         <>
-          <Bill />
-          <Tips />
-          <NumberOfPeople />
+        <div className="desktop-container">
+          <div className="desktop-sub-container">
+            <Bill />
+            <Tips />
+            <NumberOfPeople />
+          </div>
           <FinalDisplay />
+        </div>
+        
         </>
       )}
     </section>

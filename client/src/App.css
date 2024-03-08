@@ -90,7 +90,7 @@ main {
 
 #home {
     width: 99%;
-    max-width: 850px;
+    max-width: 900px;
     background: rgb(250, 250, 250);
     border: solid 1px rgb(250, 250, 250);
     border-radius: 10px;
@@ -162,6 +162,7 @@ main {
 
 #tip {
     width: 90%;
+    max-width: 450px;
     margin: 0 auto 3em;
     display: flex;
     align-items: center;
@@ -171,6 +172,7 @@ main {
 
 .radio-container {
     margin: 1em 0 .25em 0; 
+   
 }
   
   .radio-container input {
@@ -314,6 +316,12 @@ main {
 
 /* Display */
 
+#final-display {
+    width: 100%;
+    max-width: 350px;
+    margin: 1em auto;
+}
+
 .display-container {
     display: flex;
     flex-direction: column;
@@ -354,6 +362,7 @@ main {
     color: var(--secondary-background-color-light);
     margin-bottom: 0.5em;
     align-self: end;
+    letter-spacing: 3px;
 }
 
 .display-container button {
@@ -370,4 +379,65 @@ main {
 
 .display-container button:hover {
     background-color: var(--primary-background-color-light); 
-  }
+}
+
+/* Media Queries */
+
+@media(min-width: 425px) {
+    .radio-custom {
+        width: 160px;
+    }
+}
+
+@media(min-width: 750px) {
+    #bill {
+        margin-top: 2em;
+    }
+
+    .desktop-container {
+        display: flex;
+        align-items: start;
+    }
+
+    .radio-custom {
+        width: 130px;
+    }
+
+    .display-container {
+        height: 500px;
+        padding: 2em;
+    }
+
+    .display-row {
+        margin-top: 2em;
+    }
+
+
+    .display-row h3 {
+        font-size: 2.25rem;
+    }
+
+    .display-container button {
+        margin-top: 7em;
+        padding: 1em;
+        font-size: 1.25rem;
+    }
+
+}
+
+
+@media(min-width: 768px) {
+    #tip {
+        width: 80%;
+    }
+
+    .radio-custom {
+        width: 140px;
+    }
+}
+
+@media(min-width: 1024px) {
+    #tip {
+        width: 95%;
+    }
+}
