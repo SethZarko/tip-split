@@ -19,8 +19,9 @@ The advance or pro features will allow the user to:
 2. Create a profile and login 
 3. Calculate the HST payable on the bill
 4. Select whether the tip is optional, or a mandatory gratuity fixed at 18%
-5. All for tip and bill percentage allocation to each customer
-6. Save, store, and delete calculated tip slips in a user profile 
+5. Allow for tip and bill percentage allocation to each customer
+6. Display the overall total bill
+7. Save, store, and delete calculated tip slips in a user profile 
 
 Dependencies:
 
