@@ -57,6 +57,7 @@ export const Bill = ({
             onChange={handleChange}
             onBlur={handleBlur}
             maxLength="10"
+            autoComplete="off"
           />
         </>
       ) : (
@@ -69,6 +70,7 @@ export const Bill = ({
             value={billFormData.bill}
             onChange={handleBillFormChange}
             maxLength="10"
+            autoComplete="off"
           />
         <p className='cleaned-input'>{cleanNumberInput(billFormData.bill)}</p>
         {showErrorState && <p className='basic-user-error'>{errorState}</p>}

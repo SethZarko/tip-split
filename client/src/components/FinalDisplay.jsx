@@ -1,7 +1,7 @@
 import { useAppContext } from '../context/AppProvider';
 
 export const FinalDisplay = ({ isSubmitting }) => {
-  const { token } = useAppContext();
+  const { token, finalDisplayTotal, finalDisplayTip, resetCalculatorState } = useAppContext();
 
   return (
     <section id="final-display">
@@ -25,7 +25,7 @@ export const FinalDisplay = ({ isSubmitting }) => {
                   <p>/ person</p>
              
                 </div>
-                <h3>$4.25</h3>
+                <h3>${finalDisplayTip}</h3>
   
 
               </div>
@@ -37,13 +37,13 @@ export const FinalDisplay = ({ isSubmitting }) => {
                   <p>/ person</p>
                 </div>
 
-                <h3>$32.79</h3>
+                <h3>${finalDisplayTotal}</h3>
 
               </div>
 
             </div>
             <br />
-            <button>RESET</button>
+            <button onClick={resetCalculatorState}>RESET</button>
           </div>
         </>
       )}

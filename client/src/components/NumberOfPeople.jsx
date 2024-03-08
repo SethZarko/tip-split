@@ -51,6 +51,7 @@ export const NumberOfPeople = ({
             value={peopleFormData.people}
             onChange={handlePeopleFormChange}
             maxLength="4"
+            autoComplete="off"
           />
           <p className="cleaned-input">{cleanNumberInput(peopleFormData.people)}</p>
           <i className="fa-solid fa-user"></i>

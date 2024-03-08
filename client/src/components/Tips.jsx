@@ -9,14 +9,9 @@ export const Tips = ({
   handleChange 
   }) => {
 
-  const { token, tipFormData, setTipFormData } = useAppContext();
+  const { token, tipFormData, setTipFormData, handleTipClick, selectedTip } = useAppContext();
 
   const [customText, setCustomText] = useState(true);
-  const [selectedTip, setSelectedTip] = useState('');
-
-  const handleTipClick = (category) => {
-    setSelectedTip(category);
-  };
 
   const handleTipFormChange = (e) => {
     const { value } = e.target;
@@ -127,8 +122,9 @@ export const Tips = ({
               id="custom"
               className={!customText ? 'custom-show ' : ''}
               type="range"
-              min="0"
-              max="100"
+              min="0.01"
+              max="1"
+              step="0.01"
               value={tipFormData}
               onChange={handleTipFormChange}
             />
@@ -138,7 +134,7 @@ export const Tips = ({
                 handleTextRemoval(),
                 handleTipClick('')
               }}>
-                {customText ? text : `${tipFormData}%` }
+                {customText ? text : `${Math.round(tipFormData * 100)}%` }
             </span>
           </label>
         </>
