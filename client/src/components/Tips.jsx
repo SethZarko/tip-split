@@ -10,7 +10,13 @@ export const Tips = ({
   }) => {
 
   const { token, tipFormData, setTipFormData } = useAppContext();
+
   const [customText, setCustomText] = useState(true);
+  const [selectedTip, setSelectedTip] = useState('');
+
+  const handleTipClick = (category) => {
+    setSelectedTip(category);
+  };
 
   const handleTipFormChange = (e) => {
     const { value } = e.target;
@@ -44,10 +50,13 @@ export const Tips = ({
               value="0.05"
               checked={tipFormData === '5%'}
               onChange={handleTipFormChange}
-              onClick={handleTextShow}
+              onClick={() => {
+                handleTextShow(),
+                handleTipClick('5')
+              }}
               required
             />
-            <span className="radio-custom">5%</span>
+            <span className={`radio-custom ${selectedTip === '5' ? 'active' : ''}`}>5%</span>
           </label>
           <label className="radio-container" htmlFor="10%">
             <input
@@ -57,10 +66,13 @@ export const Tips = ({
               value="0.10"
               checked={tipFormData === '10%'}
               onChange={handleTipFormChange}
-              onClick={handleTextShow}
+              onClick={() => {
+                handleTextShow(),
+                handleTipClick('10')
+              }}
               required
             />
-            <span className="radio-custom">10%</span>
+            <span className={`radio-custom ${selectedTip === '10' ? 'active' : ''}`}>10%</span>
           </label>
           <label className="radio-container" htmlFor="15%">
             <input
@@ -70,10 +82,13 @@ export const Tips = ({
               value="0.15"
               checked={tipFormData === '15%'}
               onChange={handleTipFormChange}
-              onClick={handleTextShow}
+              onClick={() => {
+                handleTextShow(),
+                handleTipClick('15')
+              }}
               required
             />
-            <span className="radio-custom">15%</span>
+            <span className={`radio-custom ${selectedTip === '15' ? 'active' : ''}`}>15%</span>
           </label>
           <label className="radio-container" htmlFor="25%">
             <input
@@ -83,10 +98,13 @@ export const Tips = ({
               value="0.25"
               checked={tipFormData === '25%'}
               onChange={handleTipFormChange}
-              onClick={handleTextShow}
+              onClick={() => {
+                handleTextShow(),
+                handleTipClick('25')
+              }}
               required
             />
-            <span className="radio-custom">25%</span>
+            <span className={`radio-custom ${selectedTip === '25' ? 'active' : ''}`}>25%</span>
           </label>
           <label className="radio-container" htmlFor="50%">
             <input
@@ -96,10 +114,13 @@ export const Tips = ({
               value="0.50"
               checked={tipFormData === '50%'}
               onChange={handleTipFormChange}
-              onClick={handleTextShow}
+              onClick={() => {
+                handleTextShow(),
+                handleTipClick('50')
+              }}
               required
             />
-            <span className="radio-custom">50%</span>
+            <span className={`radio-custom ${selectedTip === '50' ? 'active' : ''}`}>50%</span>
           </label>
           <label className="radio-container" htmlFor="custom">
             <input
@@ -111,7 +132,14 @@ export const Tips = ({
               value={tipFormData}
               onChange={handleTipFormChange}
             />
-            <span className="radio-custom custom" onClick={handleTextRemoval}>{customText ? text : `${tipFormData}%` }</span>
+            <span 
+              className="radio-custom custom" 
+              onClick={() => {
+                handleTextRemoval(),
+                handleTipClick('')
+              }}>
+                {customText ? text : `${tipFormData}%` }
+            </span>
           </label>
         </>
       )}
