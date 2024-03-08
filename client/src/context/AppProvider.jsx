@@ -6,8 +6,12 @@ import { createContext, useContext, useState } from 'react'
 const AppContext = createContext({
     user: null,
     token: null,
+    billFormData: null,
+    tipFormData: null,
     setUser: () => {},
     _setToken: () => {},
+    setBillFormData: () => {},
+    setTipFormData: () => {},
 })
 
 // Context Provider
@@ -20,6 +24,7 @@ export const AppProvider = ({ children }) => {
     console.log('User Token:', token);
 
     const [billFormData, setBillFormData] = useState({ bill: '' })
+    const [tipFormData, setTipFormData] = useState(0)
 
     // Context Methods
     const setToken = (token) => {
@@ -37,10 +42,12 @@ export const AppProvider = ({ children }) => {
     const contextValue = {
         user,
         token,
+        billFormData,
+        tipFormData,
         setUser,
         setToken,
-        billFormData,
-        setBillFormData
+        setBillFormData,
+        setTipFormData
     }
 
     // Return Context

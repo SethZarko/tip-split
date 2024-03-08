@@ -5,6 +5,8 @@
     --app-background-light: rgba(147, 202, 207, 0.15);
     --primary-text-color: rgb(28, 51, 45);
     --primary-text-color-light: rgba(28, 51, 45, 0.35);
+    --primary-background-color-dark: rgb(19, 66, 71);
+    --primary-background-color-light: rgb(25, 105, 105);
 }
 
 * {
@@ -55,11 +57,23 @@ main {
     box-shadow: 0 0 6px 1px lightgrey;
 }
 
+/* Bill Component */
+
 #bill {
     display: flex;
     align-items: start;
     flex-direction: column;
     position: relative;
+}
+
+#bill::after {
+    content: 'Select Tip %';
+    margin-top: 40px;
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-text-color);
+    margin-left: 0.5em;
 }
 
 #bill label {
@@ -72,7 +86,7 @@ main {
 
 #bill input {
     width: 90%;
-    padding: .75em;
+    padding: 1em;
     border: none;
     border-radius: 8px;
     margin: 0.5em auto;
@@ -99,16 +113,119 @@ main {
     height: 2px;
     color: var(--primary-text-color-light);
     position: absolute;
-    top: 32px;
+    top: 35px;
     left: 35px;
 }
 
 .cleaned-input {
     position: absolute;
-    top: 35px;
+    top: 38px;
     left: 165px;
     font-family: 'Nanum Gothic Coding', sans-serif;
     font-weight: 700;
     font-size: 1.25rem;
     color: var(--primary-text-color);
 }
+
+/* Tip Component */
+
+#tip {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.radio-container {
+    margin: 1em 0 .25em 0; 
+}
+  
+  .radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .radio-custom {
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-size: 1.25rem;
+    color: white;
+    height: 45px;
+    width: 140px; 
+    background-color: var(--primary-background-color-dark); 
+    border-radius: 5px; 
+    padding: .65em;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    transition: ease-in .1s;
+  }
+
+  .radio-custom:hover {
+    background-color: var(--primary-background-color-light); 
+  }
+  
+  .radio-container input:checked ~ .radio-custom::after {
+    content: attr(data-number); 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000; 
+  }
+  
+  .radio-container:hover .radio-custom {
+    border-color: #aaa; 
+  }
+  
+  .custom {
+    background: rgb(235, 235, 235);
+    color: var(--primary-text-color);
+  }
+
+  .custom:hover {
+    background: rgb(250, 250, 250);
+    border: solid 1px var(--primary-text-color);
+  }
+
+  .custom-show {
+    opacity: 100 !important;
+  }
+
+ 
+#custom {
+    -webkit-appearance: none; 
+    width: 140px;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none; 
+  }
+
+  #custom::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--app-background);
+    cursor: pointer;
+  }
+
+  #custom::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #4caf50;
+    cursor: pointer;
+  }
+  
+  #custom::-ms-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #4caf50;
+    cursor: pointer;
+  }
+  
