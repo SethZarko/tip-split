@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { useAppContext } from '../context/AppProvider';
 
-export const Tips = ({ values, errors, touched, handleBlur, handleChange }) => {
+export const Tips = ({ 
+  values, 
+  errors, 
+  touched, 
+  handleBlur,
+  handleChange 
+  }) => {
+
   const { token, tipFormData, setTipFormData } = useAppContext();
   const [customText, setCustomText] = useState(true);
 
@@ -11,18 +18,22 @@ export const Tips = ({ values, errors, touched, handleBlur, handleChange }) => {
   };
 
   const handleTextRemoval = () => {
-    setCustomText((prev) => !prev);
+    setCustomText(false);
     setTipFormData(0)
+  };
+
+  const handleTextShow = () => {
+    setCustomText(true);
   };
 
   let text = 'Custom';
 
-  console.log(tipFormData);
-
   return (
     <section id="tip">
       {token ? (
-        <></>
+        <>
+        
+        </>
       ) : (
         <>
           <label className="radio-container" htmlFor="5%">
@@ -33,6 +44,8 @@ export const Tips = ({ values, errors, touched, handleBlur, handleChange }) => {
               value="0.05"
               checked={tipFormData === '5%'}
               onChange={handleTipFormChange}
+              onClick={handleTextShow}
+              required
             />
             <span className="radio-custom">5%</span>
           </label>
@@ -44,6 +57,8 @@ export const Tips = ({ values, errors, touched, handleBlur, handleChange }) => {
               value="0.10"
               checked={tipFormData === '10%'}
               onChange={handleTipFormChange}
+              onClick={handleTextShow}
+              required
             />
             <span className="radio-custom">10%</span>
           </label>
@@ -55,6 +70,8 @@ export const Tips = ({ values, errors, touched, handleBlur, handleChange }) => {
               value="0.15"
               checked={tipFormData === '15%'}
               onChange={handleTipFormChange}
+              onClick={handleTextShow}
+              required
             />
             <span className="radio-custom">15%</span>
           </label>
@@ -66,6 +83,8 @@ export const Tips = ({ values, errors, touched, handleBlur, handleChange }) => {
               value="0.25"
               checked={tipFormData === '25%'}
               onChange={handleTipFormChange}
+              onClick={handleTextShow}
+              required
             />
             <span className="radio-custom">25%</span>
           </label>
@@ -77,6 +96,8 @@ export const Tips = ({ values, errors, touched, handleBlur, handleChange }) => {
               value="0.50"
               checked={tipFormData === '50%'}
               onChange={handleTipFormChange}
+              onClick={handleTextShow}
+              required
             />
             <span className="radio-custom">50%</span>
           </label>

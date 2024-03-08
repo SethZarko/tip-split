@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useAppContext } from '../context/AppProvider';
 import PropTypes from 'prop-types';
 
@@ -8,52 +9,33 @@ export const Bill = ({
   handleBlur,
   handleChange
 }) => {
-  const { token, billFormData, setBillFormData } = useAppContext();
+  const { token, billFormData, setBillFormData, cleanNumberInput } = useAppContext();
 
-  const cleanNumberInput = (numberString) => {
-    // Remove any existing commas from the input
-    numberString = numberString.replace(/,/g, '');
-
-    // Remove any non-numeric characters except the decimal point
-    numberString = numberString.replace(/[^\d.]+/g, '');
-
-    // Ensure that the number is not negative
-    if (parseFloat(numberString) < 0) {
-      numberString = '';
-    }
-
-    // Split the number into integer and decimal parts
-    const parts = numberString.split('.');
-    let integerPart = parts[0];
-    let decimalPart = parts[1] || '';
-
-    // Remove any extra decimal points after the first one
-    decimalPart = decimalPart.replace(/\./g, '');
-
-    // Add commas to the integer part
-    let formattedInteger = '';
-    for (let i = integerPart.length - 1, j = 0; i >= 0; i--, j++) {
-      if (j % 3 === 0 && j !== 0) {
-        formattedInteger = ',' + formattedInteger;
-      }
-      formattedInteger = integerPart.charAt(i) + formattedInteger;
-    }
-
-    // Combine the integer and decimal parts
-    let formattedNumber = formattedInteger;
-    if (decimalPart) {
-      formattedNumber += '.' + decimalPart;
-    }
-
-    return formattedNumber;
-  };
+  const [errorState, setErrorState] = useState('')
+  const [showErrorState, setShowErrorState] = useState(false)
 
   const handleBillFormChange = (e) => {
     const { name, value } = e.target;
-    setBillFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  
+    // Regular expression to match a number with up to two digits after the decimal place
+    const numericRegex = /^\d*\.?\d{0,2}$/;
+  
+    // Check if the value matches the numeric pattern
+    if (numericRegex.test(value)) {
+      // If the value is numeric, update the state
+      setBillFormData((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    } else {
+      // If the value does not match the numeric pattern, set an error state
+      setErrorState('Value must be numeric');
+      setShowErrorState(true)
+      setTimeout(() => {
+        setShowErrorState(false)
+        setErrorState('');
+      }, 3000)
+    }
   };
 
   return (
@@ -89,6 +71,7 @@ export const Bill = ({
             maxLength="10"
           />
         <p className='cleaned-input'>{cleanNumberInput(billFormData.bill)}</p>
+        {showErrorState && <p className='basic-user-error'>{errorState}</p>}
         </>
       )}
     </section>

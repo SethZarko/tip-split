@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&family=Raleway:ital,wght@0,100..900;1,100..900&?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
     --app-background: rgb(147, 202, 207);
@@ -7,6 +7,7 @@
     --primary-text-color-light: rgba(28, 51, 45, 0.35);
     --primary-background-color-dark: rgb(19, 66, 71);
     --primary-background-color-light: rgb(25, 105, 105);
+    --secondary-background-color-light: rgb(15, 185, 165);
 }
 
 * {
@@ -43,6 +44,46 @@ main {
     width: 100%;
     text-align: left;
     padding: 2em;
+}
+
+.basic-user-error {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    background: crimson;
+    border-radius: 10px;
+    padding: 0.65em 1.25em;
+    margin-left: 0.5em;
+}
+
+.cleaned-input {
+    position: absolute;
+    top: 38px;
+    left: 55px;
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-text-color);
+}
+
+.fa-user {
+    position: absolute;
+    top: 38px;
+    left: 30px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-text-color);
+}
+
+#notFound h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: var(--primary-text-color-light);
+}
+
+#notFound a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: var(--primary-text-color);
 }
 
 /* Home Page */
@@ -117,21 +158,11 @@ main {
     left: 35px;
 }
 
-.cleaned-input {
-    position: absolute;
-    top: 38px;
-    left: 165px;
-    font-family: 'Nanum Gothic Coding', sans-serif;
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--primary-text-color);
-}
-
 /* Tip Component */
 
 #tip {
     width: 90%;
-    margin: 0 auto;
+    margin: 0 auto 3em;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -229,3 +260,114 @@ main {
     cursor: pointer;
   }
   
+
+  /* Number of People Componenent */
+
+#number-of-people {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 2em;
+}
+
+#number-of-people  label {
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary-text-color);
+    margin-left: 0.5em;
+}
+
+#number-of-people input {
+    width: 90%;
+    padding: 1em;
+    border: none;
+    border-radius: 8px;
+    margin: 0.5em auto;
+    background: var(--app-background-light);
+    text-align: right;
+    color: transparent;
+}
+
+#number-of-people  input::placeholder {
+    font-family: 'Raleway', sans-serif;
+    font-size: .75rem;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+
+#number-of-people::before {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 2px;
+    color: var(--primary-text-color-light);
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+
+/* Display */
+
+.display-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--primary-background-color-dark);
+    border-radius: 10px;
+    padding: 2em 1.25em;
+}
+
+.display-sub-container {
+   display: block;
+}
+
+.display-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.display-row-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.display-row-text-container p {
+    font-family: 'Nanum Gothic Coding', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: white;
+    margin-bottom: 0.5em;
+}
+
+.display-row h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    color: var(--secondary-background-color-light);
+    margin-bottom: 0.5em;
+    align-self: end;
+}
+
+.display-container button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--primary-text-color);
+    padding: 0.75em;
+    border-radius: 5px;
+    border: solid 0.5px white;
+    background: var(--secondary-background-color-light);
+    cursor: pointer;
+    transition: ease-in .1s;
+}
+
+.display-container button:hover {
+    background-color: var(--primary-background-color-light); 
+  }
