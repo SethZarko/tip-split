@@ -48,6 +48,33 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const formatNumberWithCommas = (number) => {
+    // Convert number to string
+    let numberString = number.toString();
+  
+    // Split the number into integer and decimal parts
+    let parts = numberString.split('.');
+    let integerPart = parts[0];
+    let decimalPart = parts[1] || '';
+  
+    // Add commas to the integer part
+    let formattedInteger = '';
+    for (let i = integerPart.length - 1, j = 0; i >= 0; i--, j++) {
+      if (j % 3 === 0 && j !== 0) {
+        formattedInteger = ',' + formattedInteger;
+      }
+      formattedInteger = integerPart.charAt(i) + formattedInteger;
+    }
+  
+    // Combine the integer and decimal parts
+    let formattedNumber = formattedInteger;
+    if (decimalPart) {
+      formattedNumber += '.' + decimalPart;
+    }
+  
+    return formattedNumber;
+  };
+
   const calculateResult = () => {
     let bill = parseFloat(billFormData.bill);
     let tipPercent = tipFormData;
@@ -55,15 +82,19 @@ export const AppProvider = ({ children }) => {
     let numOfPeople = parseFloat(peopleFormData.people)
 
     let totalTipPerPerson = tip / numOfPeople;
+    let roundedTotalTip = Math.round(totalTipPerPerson * 100) / 100
+    let convertedStringTotalTip = formatNumberWithCommas(roundedTotalTip)
 
     if(totalTipPerPerson > 0) {
-        setFinalDisplayTip(Math.round(totalTipPerPerson * 100) / 100)
+        setFinalDisplayTip(convertedStringTotalTip)
     }
 
     let overallTotalPerPerson = (bill + tip) / numOfPeople 
+    let roundedOverallTotal = Math.round(overallTotalPerPerson * 100) / 100
+    let convertedOveralTotal = formatNumberWithCommas(roundedOverallTotal)
 
     if(overallTotalPerPerson > 0) {
-        setFinalDisplayTotal(Math.round(overallTotalPerPerson * 100) / 100)
+        setFinalDisplayTotal(convertedOveralTotal)
     }
   };
 
