@@ -56,7 +56,7 @@ export const Bill = ({
             value={values.bill}
             onChange={handleChange}
             onBlur={handleBlur}
-            maxLength="10"
+            maxLength="6"
             autoComplete="off"
           />
         </>
@@ -69,7 +69,7 @@ export const Bill = ({
             id="bill"
             value={billFormData.bill}
             onChange={handleBillFormChange}
-            maxLength="10"
+            maxLength="6"
             autoComplete="off"
           />
         <p className='cleaned-input'>{cleanNumberInput(billFormData.bill)}</p>

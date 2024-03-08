@@ -305,21 +305,6 @@ main {
     text-align: left;
 }
 
-
-#number-of-people::before {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    font-size: 1.35rem;
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 2px;
-    color: var(--primary-text-color-light);
-    position: absolute;
-    top: 35px;
-    left: 35px;
-}
-
 /* Display */
 
 #final-display {
@@ -395,6 +380,12 @@ main {
     }
 }
 
+@media(min-width: 500px) {
+    .fa-user {
+        left: 40px;
+    }
+}
+
 @media(min-width: 750px) {
     #bill {
         margin-top: 2em;
@@ -411,7 +402,7 @@ main {
 
     .display-container {
         height: 500px;
-        padding: 2em;
+        padding: 1em;
     }
 
     .display-row {
@@ -439,6 +430,12 @@ main {
 
     .radio-custom {
         width: 140px;
+    }
+}
+
+@media(min-width: 900px) {
+    .display-container {
+        width: 110%;
     }
 }
 

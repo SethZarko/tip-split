@@ -13,15 +13,14 @@ The basic features will allow the user to:
 3. Select the number of people the tip and bill should be divided among
 4. Display the individual tip amount and bill amount payable by each customer. 
 
-The advance or pro features will allow the user to:
+The pro features will allow the user to:
 
 1. Do everything the basic features allow
 2. Create a profile and login 
 3. Calculate the HST payable on the bill
-4. Select whether the tip is optional, or a mandatory gratuity fixed at 18%
-5. Allow for tip and bill percentage allocation to each customer
-6. Display the overall total bill
-7. Save, store, and delete calculated tip slips in a user profile 
+4. Select whether the tip is selected, or is a mandatory gratuity fixed at 18% (this affect whether HST is payable on the tip - as per the CRA)
+5. Display the overall total bill
+6. Save, store, and delete calculated tip slips in a user profile 
 
 Dependencies:
 
