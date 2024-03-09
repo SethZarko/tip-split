@@ -4,9 +4,14 @@ import { useFormik } from 'formik';
 import { formSchema } from '../Yup/index.js';
 
 let initialValues = {
-  bill: '',
+  subBill: '',
+  gratuity: false,
   tip: '',
   numberOfPeople: '',
+  totalTipPerPerson: '',
+  HST: '',
+  totalBillPerPerson: '',
+  totalBill: '',
 };
 
 // Components
@@ -25,7 +30,7 @@ export const Home = () => {
   const [serverFormError, setServerFormError] = useState([]);
 
   const handleForm = (values, actions) => {
-    fetch('http://localhost:8000/api/calculations/create', {
+    fetch('http://localhost:8000/api/calc/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,6 +89,7 @@ export const Home = () => {
   return (
     <section id="home">
       {token ? (
+        // Pro User Page
         <>
           {serverFormError.map((errors, index) => {
             return (
@@ -96,13 +102,18 @@ export const Home = () => {
             <p className="success-message">{successMessage}</p>
           )}
           <form onSubmit={handleSubmit}>
-            <Bill {...props} />
-            <Tips {...props} />
-            <NumberOfPeople {...props} />
+            <div className="desktop-container">
+            <div className="desktop-sub-container">
+              <Bill {...props} />
+              <Tips {...props} />
+              <NumberOfPeople {...props} />
+            </div>
             <FinalDisplay  {...props}/>
+            </div>
           </form>
         </>
       ) : (
+        // Basic User Page
         <>
         <div className="desktop-container">
           <div className="desktop-sub-container">

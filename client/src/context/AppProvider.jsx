@@ -12,6 +12,8 @@ const AppContext = createContext({
   finalDisplayTip: null,
   finalDisplayTotal: null,
   selectedTip: null,
+  customText: null,
+  navigateToLogin: null,
   setUser: () => {},
   _setToken: () => {},
   setBillFormData: () => {},
@@ -19,23 +21,30 @@ const AppContext = createContext({
   setPeopleFormData: () => {},
   setFinalDisplayTip: () => {},
   setFinalDisplayTotal: () => {},
-  setSelectedTip: () => {}
+  setSelectedTip: () => {},
+  setCustomText: () => {},
+  setNavigateToLogin: () => {}
 });
 
 // Context Provider
 export const AppProvider = ({ children }) => {
+
   // Context State
   const [user, setUser] = useState([]);
-  // const [token, _setToken ] = useState(localStorage.getItem('ACCESS_TOKEN'))
-  const [token, _setToken] = useState(false);
-  // console.log('User Token:', token);
+  const [token, _setToken ] = useState(localStorage.getItem('ACCESS_TOKEN'))
+
 
   const [billFormData, setBillFormData] = useState({ bill: '' });
   const [tipFormData, setTipFormData] = useState(0);
   const [peopleFormData, setPeopleFormData] = useState({ people: '' });
+
   const [finalDisplayTotal, setFinalDisplayTotal] = useState(0);
   const [finalDisplayTip, setFinalDisplayTip] = useState(0);
   const [selectedTip, setSelectedTip] = useState('');
+
+  const [customText, setCustomText] = useState(true);
+
+  const [navigateToLogin, setNavigateToLogin] = useState(false);
 
   // Context Methods
   const setToken = (token) => {
@@ -46,6 +55,57 @@ export const AppProvider = ({ children }) => {
     } else {
       localStorage.removeItem('ACCESS_TOKEN');
     }
+  };
+
+  const handleTextShow = () => {
+    setCustomText(true);
+  };
+
+  const handleTextRemoval = () => {
+    setCustomText(false);
+    setTipFormData(0)
+  };
+
+  const handleTipClick = (category) => {
+    setSelectedTip(category);
+  };
+
+  const cleanNumberInput = (numberString) => {
+    // Remove any existing commas from the input
+    numberString = numberString.replace(/,/g, '');
+
+    // Remove any non-numeric characters except the decimal point
+    numberString = numberString.replace(/[^\d.]+/g, '');
+
+    // Ensure that the number is not negative
+    if (parseFloat(numberString) < 0) {
+      numberString = '';
+    }
+
+    // Split the number into integer and decimal parts
+    const parts = numberString.split('.');
+    let integerPart = parts[0];
+    let decimalPart = parts[1] || '';
+
+    // Remove any extra decimal points after the first one
+    decimalPart = decimalPart.replace(/\./g, '');
+
+    // Add commas to the integer part
+    let formattedInteger = '';
+    for (let i = integerPart.length - 1, j = 0; i >= 0; i--, j++) {
+      if (j % 3 === 0 && j !== 0) {
+        formattedInteger = ',' + formattedInteger;
+      }
+      formattedInteger = integerPart.charAt(i) + formattedInteger;
+    }
+
+    // Combine the integer and decimal parts
+    let formattedNumber = formattedInteger;
+    if (decimalPart) {
+      formattedNumber += '.' + decimalPart;
+    }
+
+    return formattedNumber;
   };
 
   const formatNumberWithCommas = (number) => {
@@ -109,49 +169,8 @@ export const AppProvider = ({ children }) => {
     setFinalDisplayTip(0)
     setFinalDisplayTotal(0)
     setSelectedTip('')
+    handleTextShow()
   }
-
-  const handleTipClick = (category) => {
-    setSelectedTip(category);
-  };
-
-  const cleanNumberInput = (numberString) => {
-    // Remove any existing commas from the input
-    numberString = numberString.replace(/,/g, '');
-
-    // Remove any non-numeric characters except the decimal point
-    numberString = numberString.replace(/[^\d.]+/g, '');
-
-    // Ensure that the number is not negative
-    if (parseFloat(numberString) < 0) {
-      numberString = '';
-    }
-
-    // Split the number into integer and decimal parts
-    const parts = numberString.split('.');
-    let integerPart = parts[0];
-    let decimalPart = parts[1] || '';
-
-    // Remove any extra decimal points after the first one
-    decimalPart = decimalPart.replace(/\./g, '');
-
-    // Add commas to the integer part
-    let formattedInteger = '';
-    for (let i = integerPart.length - 1, j = 0; i >= 0; i--, j++) {
-      if (j % 3 === 0 && j !== 0) {
-        formattedInteger = ',' + formattedInteger;
-      }
-      formattedInteger = integerPart.charAt(i) + formattedInteger;
-    }
-
-    // Combine the integer and decimal parts
-    let formattedNumber = formattedInteger;
-    if (decimalPart) {
-      formattedNumber += '.' + decimalPart;
-    }
-
-    return formattedNumber;
-  };
 
   // Context Object
   const contextValue = {
@@ -163,6 +182,8 @@ export const AppProvider = ({ children }) => {
     finalDisplayTotal,
     finalDisplayTip,
     selectedTip,
+    customText,
+    navigateToLogin,
     setUser,
     setToken,
     setBillFormData,
@@ -172,12 +193,17 @@ export const AppProvider = ({ children }) => {
     setFinalDisplayTotal,
     setFinalDisplayTip,
     resetCalculatorState,
-    handleTipClick
+    handleTipClick,
+    handleTextShow,
+    handleTextRemoval,
+    setNavigateToLogin
   };
 
   // Return Context
   return (
-    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
+    <AppContext.Provider value={contextValue}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

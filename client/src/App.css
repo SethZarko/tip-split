@@ -27,6 +27,14 @@ a {
     text-decoration: none;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+    cursor: default;
+}
+
+ul {
+    list-style-type: none;
+}
+
 main {
     width: 100%;
     margin: 0 auto;
@@ -34,6 +42,38 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.nav-container {
+    width: 100%;
+    text-align: right;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+main nav a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    color: white;
+    border-radius: 5px;
+    background: var(--primary-background-color-dark);
+    padding: 1em 1.5em;
+    transition: ease-in .1s;
+    position: relative;
+}
+
+main nav a:hover {
+    background: var(--primary-background-color-light);
+    color: var(--primary-text-color);
+}
+
+main nav img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    right: 3px;
 }
 
 .logo {
@@ -74,6 +114,58 @@ main {
     color: var(--primary-text-color);
 }
 
+.user-info-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.user-info-container h3 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  letter-spacing: .5px;
+}
+
+.user-info-btn-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.user-info-container button {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  background: rgb(150, 150, 150);
+  color: white;
+  border: solid 1px white;
+  padding: .65em 1.25em;
+  cursor: pointer;
+  transition: ease-in .1s;
+}
+
+.user-info-container button:hover {
+  background: black;
+}
+
+.user-info-container a {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  background: var(--primary-background-color-dark);
+  color: white;
+  border: solid 1px white;
+  padding: .45em 2em;
+  cursor: pointer;
+  transition: ease-in .1s;
+}
+
+.user-info-container a:hover {
+  background: var(--primary-background-color-light);
+  
+}
+
 #notFound h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
@@ -91,6 +183,7 @@ main {
 #home {
     width: 99%;
     max-width: 900px;
+    height: 100%;
     background: rgb(250, 250, 250);
     border: solid 1px rgb(250, 250, 250);
     border-radius: 10px;
@@ -356,7 +449,7 @@ main {
     letter-spacing: 3px;
 }
 
-.display-container button {
+.display-container button, .save-calculation {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     color: var(--primary-text-color);
@@ -368,10 +461,161 @@ main {
     transition: ease-in .1s;
 }
 
-.display-container button:hover {
+.display-container button:hover, .save-calculation:hover {
     background-color: var(--primary-background-color-light); 
 }
 
+.save-calculation {
+  color: white !important;
+}
+
+/* Register */
+
+.register-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-text-color);
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .register-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-background-color-dark);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .register-form button:hover {
+    background-color: var(--primary-background-color-light);
+  }
+  
+  .login-to-register-link {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .login-to-register-link a {
+    font-family: 'Raleway', sans-serif;
+    color: var(--primary-background-color-light);
+    text-decoration: none;
+  }
+  
+  .login-to-register-link a:hover {
+    text-decoration: underline;
+  }
+
+  .register-form p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+
+  .success-register {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    letter-spacing: 1.25px;
+    background: green;
+    color: white;
+    border: solid 1px white;
+    border-radius: 10px;
+    text-align: center;
+    padding: .65em 1.25em;
+    margin-bottom: 1em;
+  }
+
+  .go-pro-container {
+    width: 100%;
+    max-width: 650px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: var(--primary-background-color-dark);
+    padding: 2em 2em 0;
+    margin-bottom: 2em;
+  }
+
+  .go-pro-container h2 {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    text-align: center;
+  }
+
+  .go-pro-container ul {
+    padding: 1em;
+  }
+
+  .go-pro-container li {
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+  }
+
+  .go-pro-container i {
+    color: white;
+    background: green;
+    border: solid 1px white;
+    border-radius: 50px;
+    padding: .15em;
+    margin-right: 0.5em;
+    align-self: start;
+  }
+
+  .go-pro-container p {
+    font-family: 'Nanum Gothic Coding';
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1.25px;
+    line-height: 1.6;
+  }
+
+  .free-btn-redicrect {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    background: var(--primary-background-color-dark);
+    color: white;
+    padding: 0.65em 1.25em;
+    border-radius: 5px;
+    margin: 2em 0;
+    transition: ease-in .1s;
+  }
+
+  .free-btn-redicrect:hover {
+    background: var(--primary-background-color-light);
+    color: black;
+  }
+  
 /* Media Queries */
 
 @media(min-width: 425px) {
@@ -383,6 +627,10 @@ main {
 @media(min-width: 500px) {
     .fa-user {
         left: 40px;
+    }
+
+    .cleaned-input {
+        left: 65px;
     }
 }
 
@@ -420,6 +668,9 @@ main {
         font-size: 1.25rem;
     }
 
+    .user-info-btn-container {
+      flex-direction: row;
+    }
 }
 
 

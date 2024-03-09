@@ -9,7 +9,7 @@ import { isValidObjectId } from '../validation/isValidID.js';
 // ---- ADMIN CRUD CONTROLLERS ---- //
 
 // Admin Create Controller
-export const adminCreateController = async (req, res) => {
+export const adminCreateController = async (req, res, next) => {
     const { email, password } = req.body
     
     try {
@@ -27,7 +27,7 @@ export const adminCreateController = async (req, res) => {
 
       } catch (error) {
         
-        return res.status(400).json({error: error.message})
+        next(error)
     }
 }
 

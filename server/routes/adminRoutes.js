@@ -36,7 +36,7 @@ router.delete('/:id', authenticateLoggedInAdmin, adminDeleteController)
 // POST /api/admin/auth/login
 router.post('/auth/login', loginValidation, adminLoginController)
 
-// POST /api/auth/admin/logout
+// POST /api/admin/auth/logout
 router.post('/auth/logout', authenticateLoggedInAdmin, adminLogoutController)
 
 export default router

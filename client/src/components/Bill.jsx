@@ -22,13 +22,11 @@ export const Bill = ({
   
     // Check if the value matches the numeric pattern
     if (numericRegex.test(value)) {
-      // If the value is numeric, update the state
       setBillFormData((prevState) => ({
         ...prevState,
         [name]: value,
       }));
     } else {
-      // If the value does not match the numeric pattern, set an error state
       setErrorState('Value must be numeric');
       setShowErrorState(true)
       setTimeout(() => {
@@ -42,23 +40,25 @@ export const Bill = ({
     <section id="bill">
       {token ? (
         <>
-          {errors.bill && touched.bill && (
+          {errors.subBill && touched.subBill && (
             <p className="error-message">
-              <i className="fa-solid fa-circle-exclamation"></i> {errors.bill}
+              <i className="fa-solid fa-circle-exclamation"></i> {errors.subBill}
             </p>
           )}
           <label htmlFor="bill">Bill</label>
           <input
-            className={errors.bill && touched.bill ? 'input-error' : ''}
+            className={errors.subBill && touched.subBill ? 'input-error' : ''}
             type="text"
-            name="bill"
+            name="subBill"
             id="bill"
-            value={values.bill}
+            value={values.subBill}
             onChange={handleChange}
             onBlur={handleBlur}
             maxLength="6"
             autoComplete="off"
           />
+          <p className='cleaned-input'>{cleanNumberInput(values.subBill)}</p>
+          {showErrorState && <p className='basic-user-error'>{errorState}</p>}
         </>
       ) : (
         <>

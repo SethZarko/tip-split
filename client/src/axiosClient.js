@@ -2,7 +2,6 @@ import axios from 'axios'
 
 // Login ProUser
 export const axiosClientLogin = axios.create({
-    baseURL: import.meta.env.API_LOGIN_URL,
     withCredentials: true
 })
 
@@ -26,3 +25,5 @@ axiosClientLogin.interceptors.response.use((response) => {
     
     throw error
 })
+
+export default axiosClientLogin
