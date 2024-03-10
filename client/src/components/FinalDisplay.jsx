@@ -52,7 +52,10 @@ export const FinalDisplay = () => {
 
             <button onClick={resetCalculatorState}>RESET</button>
             <br />
-            <button onClick={handleSaveCalculation} style={{ color: 'white' }}>Save Calculation</button>
+            <button onClick={(e) => {
+              window.scrollTo(0, 0),
+              handleSaveCalculation(e)
+            }} style={{ color: 'white' }}>Save Calculation</button>
           </div>
         </>
       ) : (

@@ -20,6 +20,7 @@ const AppContext = createContext({
   selectGratuity: null,
   finalTotalBill: null,
   HST: null,
+  successMessage: null,
   setUser: () => {},
   _setToken: () => {},
   setBillFormData: () => {},
@@ -35,7 +36,8 @@ const AppContext = createContext({
   setGrauityFormData: () => {},
   setSelectGratuity: () => {},
   setFinalTotalBill: () => {},
-  setHST: () => {}
+  setHST: () => {},
+  setSuccessMessage: () => {}
 });
 
 // Context Provider
@@ -62,6 +64,8 @@ export const AppProvider = ({ children }) => {
   const [finalDisplayTip, setFinalDisplayTip] = useState(0);
   const [finalTotalBill, setFinalTotalBill] = useState(0);
   const [HST, setHST] = useState(0)
+
+  const [successMessage, setSuccessMessage] = useState(null)
 
   const [navigateToLogin, setNavigateToLogin] = useState(false);
 
@@ -192,6 +196,7 @@ export const AppProvider = ({ children }) => {
   };
 
   const calculateResultPro = () => {
+    // Set Data from Form
     let bill = parseFloat(billFormData.bill);
     let tipPercent = tipFormData;
     let hst = parseFloat(HSTFormData);
@@ -204,17 +209,21 @@ export const AppProvider = ({ children }) => {
     }
     let numOfPeople = parseFloat(peopleFormData.people)
 
+    // Calculate and round tip/Gratuity and HST
     let tip = bill * tipPercent;
     let hstOnBill = bill * hst;
     if(isNaN(hstOnBill)){
       hstOnBill = 0
     }
-    setHST(hstOnBill)
+    let roundedHST = Math.round(hstOnBill * 100) / 100
+    setHST(roundedHST)
+
     if(gratuity) {
       tipPercent = 0.18
       tip = (bill + hstOnBill) * tipPercent
     }
 
+    // Calculate/Round and Display total tip per person
     let totalTipPerPerson = tip / numOfPeople;
     let roundedTotalTip = Math.round(totalTipPerPerson * 100) / 100
     let convertedStringTotalTip = formatNumberWithCommas(roundedTotalTip)
@@ -223,6 +232,7 @@ export const AppProvider = ({ children }) => {
       setFinalDisplayTip(convertedStringTotalTip)
     }
 
+    // Calculate/Round and Display total bill per person
     let overallTotalPerPerson = (bill + hstOnBill + tip) / numOfPeople 
     let roundedOverallTotal = Math.round(overallTotalPerPerson * 100) / 100
     let convertedOveralTotal = formatNumberWithCommas(roundedOverallTotal)
@@ -231,11 +241,13 @@ export const AppProvider = ({ children }) => {
         setFinalDisplayTotal(convertedOveralTotal)
     }
     
+    // Calculate and Display total bill
     let totalBill = bill + hstOnBill + tip;
-    if(isNaN(totalBill)) {
-      totalBill = 0;
+    let roundedTotalBill = Math.round(totalBill * 100) / 100
+    if(isNaN(roundedTotalBill)) {
+      roundedTotalBill = 0;
     }
-    setFinalTotalBill(totalBill)
+    setFinalTotalBill(roundedTotalBill)
   };
 
   useEffect(() => {
@@ -260,8 +272,37 @@ export const AppProvider = ({ children }) => {
     handleTextShow()
   }
 
-  const handleSaveCalculation = () => {
+  let bill = billFormData.bill
+  let people = peopleFormData.people
 
+  const handleSaveCalculation = async (e) => {
+    e.preventDefault()
+
+    await fetch('http://localhost:8000/api/calc/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        bill,
+        tipFormData,
+        gratuityFormData,
+        people,
+        HST,
+        finalDisplayTip,
+        finalDisplayTotal,
+        finalTotalBill
+      })
+    }).then(() => {
+      resetCalculatorState()
+      setSuccessMessage('Calculation Saved!');
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 3000)
+    }).catch((error) => {
+      console.error(error)
+    })
   }
 
   // Context Object
@@ -282,6 +323,7 @@ export const AppProvider = ({ children }) => {
     selectGratuity,
     finalTotalBill,
     HST,
+    successMessage,
     setUser,
     setToken,
     setBillFormData,

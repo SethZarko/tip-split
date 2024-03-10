@@ -2,34 +2,34 @@ import mongoose, { Schema } from "mongoose"
 
 
 const calculatorSchmea = new Schema({
-    subBill: {
+    bill: {
         type: String,
         required: true
     },
-    gratuity: {
+    tipFormData: {
+        type: String,
+        required: true
+    },
+    gratuityFormData: {
         type: String
     },
-    tip: {
-        type: String,
-        required: true
-    },
-    numberOfPeople: {
-        type: String,
-        required: true
-    },
-    totalTipPerPerson: {
+    people: {
         type: String,
         required: true
     },
     HST: {
-        type: String
+        type: Number
     },
-    totalBillPerPerson: {
+    finalDisplayTip: {
         type: String,
         required: true
     },
-    totalBill: {
+    finalDisplayTotal: {
         type: String,
+        required: true
+    },
+    finalTotalBill: {
+        type: Number,
         required: true
     },
     createdAt: {
@@ -42,20 +42,13 @@ const calculatorSchmea = new Schema({
 // ---- Mongoose Statics ---- //
 
 //Save to Database
-calculatorSchmea.statics.createCalculation = async function(bill, gratuity, tip, numberOfPeople, totalTipPerPerson, hst, totalBillPerPerson, totalBill) {
+calculatorSchmea.statics.createCalculation = async function(bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill) {
     
     try {
 
         // Create and Save New User
         const query = {
-            bill, 
-            gratuity, 
-            tip, 
-            numberOfPeople,
-            totalTipPerPerson, 
-            hst, 
-            totalBillPerPerson, 
-            totalBill
+            bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill
         }
 
         const calculation = new this(query)

@@ -28,37 +28,33 @@ export const loginValidation = [
 ]
 
 export const calcValidation = [
-    body("subBill")
+    body("bill")
         .notEmpty()
         .trim()
         .escape(),
-    body("gratuity")
-        .escape(),
-    body("tipPercent")
+    body("tipFormData")
         .notEmpty()
         .trim()
         .escape(),
-    body("tip")
-        .notEmpty()
-        .trim()
-        .escape(),
-    body("numberOfPeople")
-        .notEmpty()
-        .trim()
-        .escape(),
-    body("totalTipPerPerson")
-        .notEmpty()
-        .trim()
+    body("gratuityFormData")
+        .optional()
         .escape(),
     body("HST")
+        .optional()
+        .escape(),
+    body("people")
         .notEmpty()
         .trim()
         .escape(),
-    body("totalBillPerPerson")
+    body("finalDisplayTip")
         .notEmpty()
         .trim()
         .escape(),
-    body("totalBill")
+    body("finalDisplayTotal")
+        .notEmpty()
+        .trim()
+        .escape(),
+    body("finalTotalBill")
         .notEmpty()
         .trim()
         .escape(),

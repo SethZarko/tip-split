@@ -7,7 +7,7 @@ import { useAppContext } from '../context/AppProvider'
 
 
 export const ProUserLayout = () => {
-    const { token, user, setUser, setToken } = useAppContext()
+    const { token, user, setUser, setToken, successMessage } = useAppContext()
 
     useEffect(() => {
         if (token !== null) {
@@ -36,7 +36,7 @@ export const ProUserLayout = () => {
                 <h3>Logged in as: {user} </h3>
 
                 <div className="user-info-btn-container">
-                    <Link href="#" className='btn-logout'>Profile</Link>
+                    <Link to='/pro/profile' className='btn-logout'>Profile</Link>
                     <button href="#" onClick={onLogout} className='btn-logout'>Logout</button>
                 </div>
 
@@ -46,6 +46,7 @@ export const ProUserLayout = () => {
             <div className="logo-container">
                 <h1 className='logo'>SPLI-<br/>-TTER</h1>
             </div>
+            {successMessage && <p className='success-saved-calculation'>{successMessage}</p>}
             {token ? <Outlet/> : <Navigate to='/'/>}    
         </main>
     )
