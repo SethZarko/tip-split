@@ -18,7 +18,7 @@ The pro features will allow the user to:
 1. Do everything the basic features allow
 2. Create a profile and login 
 3. Calculate the HST payable on the bill
-4. Select whether the tip is selected, or is a mandatory gratuity fixed at 18% (this affect whether HST is payable on the tip - as per the CRA)
+4. Select whether the tip is selected, or is a mandatory gratuity fixed at 18% (this affects whether HST is payable on the tip - as per the CRA)
 5. Display the overall total bill
 6. Save, store, and delete calculated tip slips in a user profile 
 
@@ -26,4 +26,3 @@ Dependencies:
 
 React Router Dom
 Axios
-Formik / Yup

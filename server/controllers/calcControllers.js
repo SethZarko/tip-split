@@ -8,7 +8,9 @@ import { isValidObjectId } from '../validation/isValidID.js'
 
 // contact Create Controller
 export const calcCreateController = async (req, res, next) => {
-    const { subBill, gratuity, tipPercent, tip, numberOfPeople, totalTipPerPerson, HST, totalBillPerPerson, totalBill } = req.body
+    const { bill, gratuity, tip, numberOfPeople, totalTipPerPerson, hst, totalBillPerPerson, totalBill } = req.body
+
+    
     
     try {
 
@@ -19,7 +21,7 @@ export const calcCreateController = async (req, res, next) => {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const calculator = await Calculator.createCalculation(subBill, gratuity, tipPercent, tip, numberOfPeople, totalTipPerPerson, HST, totalBillPerPerson, totalBill)
+        const calculator = await Calculator.createCalculation(bill, gratuity, tip, numberOfPeople, totalTipPerPerson, hst, totalBillPerPerson, totalBill)
     
         return res.status(201).json(calculator)
 

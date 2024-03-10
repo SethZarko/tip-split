@@ -1,14 +1,8 @@
 import { useAppContext } from '../context/AppProvider';
 
-export const Tips = ({ 
-  values, 
-  errors, 
-  touched, 
-  handleBlur,
-  handleChange 
-  }) => {
+export const Tips = () => {
 
-  const { token, tipFormData, setTipFormData, handleTipClick, selectedTip, customText, handleTextShow, handleTextRemoval } = useAppContext();
+  const { token, tipFormData, setTipFormData, handleTipClick, selectedTip, customText, handleTextShow, handleTextRemoval, gratuityFormData } = useAppContext();
 
   const handleTipFormChange = (e) => {
     const { value } = e.target;
@@ -21,7 +15,7 @@ export const Tips = ({
     <section id="tip">
       {token ? (
         <>
-        <label className="radio-container" htmlFor="5%">
+        <label className={`radio-container ${gratuityFormData ? 'disabled' : ''}`}  htmlFor="5%">
             <input
               id="5%"
               type="radio"
@@ -33,11 +27,12 @@ export const Tips = ({
                 handleTextShow(),
                 handleTipClick('5')
               }}
+              disabled={gratuityFormData}
               required
             />
             <span className={`radio-custom ${selectedTip === '5' ? 'active' : ''}`}>5%</span>
           </label>
-          <label className="radio-container" htmlFor="10%">
+          <label className={`radio-container ${gratuityFormData ? 'disabled' : ''}`}  htmlFor="10%">
             <input
               id="10%"
               type="radio"
@@ -49,11 +44,12 @@ export const Tips = ({
                 handleTextShow(),
                 handleTipClick('10')
               }}
+              disabled={gratuityFormData}
               required
             />
             <span className={`radio-custom ${selectedTip === '10' ? 'active' : ''}`}>10%</span>
           </label>
-          <label className="radio-container" htmlFor="15%">
+          <label className={`radio-container ${gratuityFormData ? 'disabled' : ''}`}  htmlFor="15%">
             <input
               id="15%"
               type="radio"
@@ -65,11 +61,12 @@ export const Tips = ({
                 handleTextShow(),
                 handleTipClick('15')
               }}
+              disabled={gratuityFormData}
               required
             />
             <span className={`radio-custom ${selectedTip === '15' ? 'active' : ''}`}>15%</span>
           </label>
-          <label className="radio-container" htmlFor="25%">
+          <label className={`radio-container ${gratuityFormData ? 'disabled' : ''}`}  htmlFor="25%">
             <input
               id="25%"
               type="radio"
@@ -81,11 +78,12 @@ export const Tips = ({
                 handleTextShow(),
                 handleTipClick('25')
               }}
+              disabled={gratuityFormData}
               required
             />
             <span className={`radio-custom ${selectedTip === '25' ? 'active' : ''}`}>25%</span>
           </label>
-          <label className="radio-container" htmlFor="50%">
+          <label className={`radio-container ${gratuityFormData ? 'disabled' : ''}`}  htmlFor="50%">
             <input
               id="50%"
               type="radio"
@@ -97,11 +95,12 @@ export const Tips = ({
                 handleTextShow(),
                 handleTipClick('50')
               }}
+              disabled={gratuityFormData}
               required
             />
             <span className={`radio-custom ${selectedTip === '50' ? 'active' : ''}`}>50%</span>
           </label>
-          <label className="radio-container" htmlFor="custom">
+          <label className={`radio-container ${gratuityFormData ? 'disabled' : ''}`}  htmlFor="custom">
             <input
               id="custom"
               className={!customText ? 'custom-show ' : ''}
@@ -111,6 +110,7 @@ export const Tips = ({
               step="0.01"
               value={tipFormData}
               onChange={handleTipFormChange}
+              disabled={gratuityFormData}
             />
             <span 
               className="radio-custom custom" 

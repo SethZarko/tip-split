@@ -7,11 +7,7 @@ const calculatorSchmea = new Schema({
         required: true
     },
     gratuity: {
-        type: Boolean
-    },
-    tipPercent: {
-        type: String,
-        required: true
+        type: String
     },
     tip: {
         type: String,
@@ -26,8 +22,7 @@ const calculatorSchmea = new Schema({
         required: true
     },
     HST: {
-        type: String,
-        required: true
+        type: String
     },
     totalBillPerPerson: {
         type: String,
@@ -47,18 +42,18 @@ const calculatorSchmea = new Schema({
 // ---- Mongoose Statics ---- //
 
 //Save to Database
-calculatorSchmea.statics.createCalculation = async function(subBill, gratuity, tipPercent, tip, numberOfPeople, totalTipPerPerson, HST, totalBillPerPerson, totalBill) {
+calculatorSchmea.statics.createCalculation = async function(bill, gratuity, tip, numberOfPeople, totalTipPerPerson, hst, totalBillPerPerson, totalBill) {
+    
     try {
 
         // Create and Save New User
         const query = {
-            subBill, 
+            bill, 
             gratuity, 
-            tipPercent, 
             tip, 
             numberOfPeople,
             totalTipPerPerson, 
-            HST, 
+            hst, 
             totalBillPerPerson, 
             totalBill
         }

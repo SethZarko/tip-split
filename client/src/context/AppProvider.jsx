@@ -14,6 +14,12 @@ const AppContext = createContext({
   selectedTip: null,
   customText: null,
   navigateToLogin: null,
+  selectHST: null,
+  HSTFormData: null,
+  gratuityFormData: null,
+  selectGratuity: null,
+  finalTotalBill: null,
+  HST: null,
   setUser: () => {},
   _setToken: () => {},
   setBillFormData: () => {},
@@ -23,7 +29,13 @@ const AppContext = createContext({
   setFinalDisplayTotal: () => {},
   setSelectedTip: () => {},
   setCustomText: () => {},
-  setNavigateToLogin: () => {}
+  setNavigateToLogin: () => {},
+  setSelectHST: () => {},
+  setHSTFormData: () => {},
+  setGrauityFormData: () => {},
+  setSelectGratuity: () => {},
+  setFinalTotalBill: () => {},
+  setHST: () => {}
 });
 
 // Context Provider
@@ -37,12 +49,19 @@ export const AppProvider = ({ children }) => {
   const [billFormData, setBillFormData] = useState({ bill: '' });
   const [tipFormData, setTipFormData] = useState(0);
   const [peopleFormData, setPeopleFormData] = useState({ people: '' });
+  const [HSTFormData, setHSTFormData] = useState('');
+  const [gratuityFormData, setGrauityFormData] = useState('')
+
+  const [selectedTip, setSelectedTip] = useState('');
+  const [selectHST, setSelectedHST] = useState('');
+  const [selectGratuity, setSelectGratuity] = useState('')
+
+  const [customText, setCustomText] = useState(true);
 
   const [finalDisplayTotal, setFinalDisplayTotal] = useState(0);
   const [finalDisplayTip, setFinalDisplayTip] = useState(0);
-  const [selectedTip, setSelectedTip] = useState('');
-
-  const [customText, setCustomText] = useState(true);
+  const [finalTotalBill, setFinalTotalBill] = useState(0);
+  const [HST, setHST] = useState(0)
 
   const [navigateToLogin, setNavigateToLogin] = useState(false);
 
@@ -68,6 +87,20 @@ export const AppProvider = ({ children }) => {
 
   const handleTipClick = (category) => {
     setSelectedTip(category);
+  };
+
+  const handleHSTClick = (category) => {
+    setSelectedHST(category);
+    if(selectHST === 'hst') {
+      setSelectedHST('')
+    }
+  };
+
+  const handleGratuityClick = (category) => {
+    setSelectGratuity(category);
+    if(selectGratuity === 'g') {
+      setSelectGratuity('')
+    }
   };
 
   const cleanNumberInput = (numberString) => {
@@ -158,18 +191,77 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const calculateResultPro = () => {
+    let bill = parseFloat(billFormData.bill);
+    let tipPercent = tipFormData;
+    let hst = parseFloat(HSTFormData);
+    if(isNaN(hst)) {
+      hst = 0;
+    }
+    let gratuity = parseFloat(gratuityFormData)
+    if(isNaN(gratuity)) {
+      gratuity = 0;
+    }
+    let numOfPeople = parseFloat(peopleFormData.people)
+
+    let tip = bill * tipPercent;
+    let hstOnBill = bill * hst;
+    if(isNaN(hstOnBill)){
+      hstOnBill = 0
+    }
+    setHST(hstOnBill)
+    if(gratuity) {
+      tipPercent = 0.18
+      tip = (bill + hstOnBill) * tipPercent
+    }
+
+    let totalTipPerPerson = tip / numOfPeople;
+    let roundedTotalTip = Math.round(totalTipPerPerson * 100) / 100
+    let convertedStringTotalTip = formatNumberWithCommas(roundedTotalTip)
+
+    if(totalTipPerPerson > 0) {
+      setFinalDisplayTip(convertedStringTotalTip)
+    }
+
+    let overallTotalPerPerson = (bill + hstOnBill + tip) / numOfPeople 
+    let roundedOverallTotal = Math.round(overallTotalPerPerson * 100) / 100
+    let convertedOveralTotal = formatNumberWithCommas(roundedOverallTotal)
+
+    if(overallTotalPerPerson > 0) {
+        setFinalDisplayTotal(convertedOveralTotal)
+    }
+    
+    let totalBill = bill + hstOnBill + tip;
+    if(isNaN(totalBill)) {
+      totalBill = 0;
+    }
+    setFinalTotalBill(totalBill)
+  };
+
   useEffect(() => {
-    calculateResult();
-  }, [billFormData.bill, tipFormData, peopleFormData.people])
+    if(token) {
+      calculateResultPro();
+    } else {
+      calculateResult();
+    }
+  }, [billFormData.bill, tipFormData, peopleFormData.people, HSTFormData, gratuityFormData])
 
   const resetCalculatorState = () => {
     setBillFormData({ bill: ''})
     setTipFormData(0)
     setPeopleFormData({ people: '' })
+    setHSTFormData('')
+    setGrauityFormData('')
     setFinalDisplayTip(0)
     setFinalDisplayTotal(0)
     setSelectedTip('')
+    handleHSTClick('')
+    handleGratuityClick('')
     handleTextShow()
+  }
+
+  const handleSaveCalculation = () => {
+
   }
 
   // Context Object
@@ -184,6 +276,12 @@ export const AppProvider = ({ children }) => {
     selectedTip,
     customText,
     navigateToLogin,
+    selectHST,
+    HSTFormData,
+    gratuityFormData,
+    selectGratuity,
+    finalTotalBill,
+    HST,
     setUser,
     setToken,
     setBillFormData,
@@ -196,7 +294,14 @@ export const AppProvider = ({ children }) => {
     handleTipClick,
     handleTextShow,
     handleTextRemoval,
-    setNavigateToLogin
+    setNavigateToLogin,
+    handleHSTClick,
+    setHSTFormData,
+    handleSaveCalculation,
+    setGrauityFormData,
+    setSelectGratuity,
+    handleGratuityClick,
+    setCustomText
   };
 
   // Return Context

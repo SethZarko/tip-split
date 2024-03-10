@@ -1,25 +1,35 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { useAppContext } from '../context/AppProvider';
 import PropTypes from 'prop-types';
 
-export const Bill = ({
-  values,
-  errors,
-  touched,
-  handleBlur,
-  handleChange
-}) => {
-  const { token, billFormData, setBillFormData, cleanNumberInput } = useAppContext();
+export const Bill = () => {
+  const {
+    token,
+    billFormData,
+    setBillFormData,
+    cleanNumberInput,
+    handleHSTClick,
+    selectHST,
+    HSTFormData,
+    setHSTFormData,
+    gratuityFormData,
+    setGrauityFormData,
+    handleGratuityClick,
+    selectGratuity,
+    setTipFormData,
+    handleTipClick,
+    setCustomText,
+  } = useAppContext();
 
-  const [errorState, setErrorState] = useState('')
-  const [showErrorState, setShowErrorState] = useState(false)
+  const [errorState, setErrorState] = useState('');
+  const [showErrorState, setShowErrorState] = useState(false);
 
   const handleBillFormChange = (e) => {
     const { name, value } = e.target;
-  
+
     // Regular expression to match a number with up to two digits after the decimal place
     const numericRegex = /^\d*\.?\d{0,2}$/;
-  
+
     // Check if the value matches the numeric pattern
     if (numericRegex.test(value)) {
       setBillFormData((prevState) => ({
@@ -28,42 +38,40 @@ export const Bill = ({
       }));
     } else {
       setErrorState('Value must be numeric');
-      setShowErrorState(true)
+      setShowErrorState(true);
       setTimeout(() => {
-        setShowErrorState(false)
+        setShowErrorState(false);
         setErrorState('');
-      }, 3000)
+      }, 3000);
+    }
+  };
+
+  const handleHSTFormChange = () => {
+    if (HSTFormData === '0.13') {
+      setHSTFormData('');
+    } else {
+      setHSTFormData('0.13');
+    }
+  };
+
+  const handleGratuityFormChange = () => {
+    if (gratuityFormData === '0.18') {
+      setGrauityFormData('');
+    } else {
+      setGrauityFormData('0.18');
+      setTipFormData(0);
+      handleTipClick('');
+      setCustomText(true);
     }
   };
 
   return (
     <section id="bill">
       {token ? (
+        // Pro User
         <>
-          {errors.subBill && touched.subBill && (
-            <p className="error-message">
-              <i className="fa-solid fa-circle-exclamation"></i> {errors.subBill}
-            </p>
-          )}
           <label htmlFor="bill">Bill</label>
           <input
-            className={errors.subBill && touched.subBill ? 'input-error' : ''}
-            type="text"
-            name="subBill"
-            id="bill"
-            value={values.subBill}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            maxLength="6"
-            autoComplete="off"
-          />
-          <p className='cleaned-input'>{cleanNumberInput(values.subBill)}</p>
-          {showErrorState && <p className='basic-user-error'>{errorState}</p>}
-        </>
-      ) : (
-        <>
-        <label htmlFor="bill">Bill</label>
-        <input
             type="text"
             name="bill"
             id="bill"
@@ -72,8 +80,65 @@ export const Bill = ({
             maxLength="6"
             autoComplete="off"
           />
-        <p className='cleaned-input'>{cleanNumberInput(billFormData.bill)}</p>
-        {showErrorState && <p className='basic-user-error'>{errorState}</p>}
+          <p className="cleaned-input">{cleanNumberInput(billFormData.bill)}</p>
+          {showErrorState && <p className="basic-user-error">{errorState}</p>}
+          <br />
+          <div className="taxes-title-container">
+            <h3>HST</h3>
+            <h3>Gratuity</h3>
+          </div>
+          <div className="taxes-container">
+            <label className="hst-container" htmlFor="hst">
+              <input
+                id="hst"
+                type="radio"
+                name="hst"
+                value={HSTFormData}
+                checked={HSTFormData === '13%'}
+                onChange={handleHSTFormChange}
+                onClick={() => {
+                  handleHSTClick('hst');
+                }}
+              />
+              <span className={`hst ${selectHST === 'hst' ? 'active' : ''}`}>
+                13%
+              </span>
+            </label>
+            <label className="hst-container" htmlFor="gratuity">
+              <input
+                id="gratuity"
+                type="radio"
+                name="gratuity"
+                value={gratuityFormData}
+                checked={gratuityFormData === '18%'}
+                onChange={() => {
+                  handleGratuityFormChange();
+                }}
+                onClick={() => {
+                  handleGratuityClick('g');
+                }}
+              />
+              <span className={`hst ${selectGratuity === 'g' ? 'active' : ''}`}>
+                18%
+              </span>
+            </label>
+          </div>
+        </>
+      ) : (
+        // Basic User
+        <>
+          <label htmlFor="bill">Bill</label>
+          <input
+            type="text"
+            name="bill"
+            id="bill"
+            value={billFormData.bill}
+            onChange={handleBillFormChange}
+            maxLength="6"
+            autoComplete="off"
+          />
+          <p className="cleaned-input">{cleanNumberInput(billFormData.bill)}</p>
+          {showErrorState && <p className="basic-user-error">{errorState}</p>}
         </>
       )}
     </section>

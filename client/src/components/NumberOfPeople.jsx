@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { useAppContext } from '../context/AppProvider';
 
-export const NumberOfPeople = ({
-  values,
-  errors,
-  touched,
-  handleBlur,
-  handleChange,
-}) => {
+export const NumberOfPeople = () => {
   const { token, peopleFormData, setPeopleFormData, cleanNumberInput } =
     useAppContext();
 
