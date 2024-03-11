@@ -1,0 +1,6 @@
+services:
+  - name: express-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
