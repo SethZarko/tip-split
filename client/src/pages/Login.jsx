@@ -28,7 +28,7 @@ export const Login = () => {
     setErrors(null);
 
     axiosClientLogin
-      .post('http://localhost:8000/api/admin/auth/login', payload)
+      .post('https://tip-split.onrender.com/api/admin/auth/login', payload)
       .then(({ data }) => {
         setToken(data.token);
         setUser(data.user);
