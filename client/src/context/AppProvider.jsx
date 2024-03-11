@@ -278,7 +278,7 @@ export const AppProvider = ({ children }) => {
   const handleSaveCalculation = async (e) => {
     e.preventDefault()
 
-    await fetch('http://localhost:8000/api/calc/create', {
+    await fetch('https://tip-split.onrender.com/api/calc/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

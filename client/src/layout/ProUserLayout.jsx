@@ -11,7 +11,7 @@ export const ProUserLayout = () => {
 
     useEffect(() => {
         if (token !== null) {
-            axiosClientLogin.get('http://localhost:8000/api/admin/all')
+            axiosClientLogin.get('https://tip-split.onrender.com/api/admin/all')
             .then(({ data }) => {
                 data.map((elem) => {
                     setUser(elem.email)
@@ -23,7 +23,7 @@ export const ProUserLayout = () => {
     const onLogout = (e) => {
         e.preventDefault()
 
-        axiosClientLogin.post('http://localhost:8000/api/admin/auth/logout')
+        axiosClientLogin.post('https://tip-split.onrender.com/api/admin/auth/logout')
             .then(() => {
                 setUser([])
                 setToken(null)

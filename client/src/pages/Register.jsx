@@ -22,7 +22,7 @@ export const Register = () => {
     };
 
     axiosClientLogin
-      .post('http://localhost:8000/api/admin/create', payload)
+      .post('https://tip-split.onrender.com/api/admin/create', payload)
       .then(({ data }) => {
         if (data) {
           emailRef.current.value = '';
