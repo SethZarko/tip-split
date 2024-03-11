@@ -18,7 +18,7 @@ const calculatorSchmea = new Schema({
         required: true
     },
     HST: {
-        type: Number
+        type: String
     },
     finalDisplayTip: {
         type: String,
@@ -29,7 +29,7 @@ const calculatorSchmea = new Schema({
         required: true
     },
     finalTotalBill: {
-        type: Number,
+        type: String,
         required: true
     },
     createdAt: {

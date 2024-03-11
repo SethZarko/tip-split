@@ -5,7 +5,7 @@ import { useAppContext } from '../context/AppProvider';
 import { axiosClientLogin } from '../axiosClient.js';
 
 export const UserProfile = () => {
-  const { token } = useAppContext();
+  const { token, formatNumberWithCommas } = useAppContext();
 
   const [savedFormData, setSavedFormData] = useState([]);
   const [deletedMessage, setDeletedMessage] = useState({});
@@ -55,7 +55,7 @@ export const UserProfile = () => {
         <Link to="/pro/home">Return Home</Link>
       </div>
       <br />
-      {savedFormData.length === 0 && <h3>No Saved Calculations</h3>}
+      {savedFormData.length === 0 && <h3 className='no-saved-calculations'>No Saved Calculations</h3>}
       {Object.keys(deletedMessage).map((id) => (
         <h2 key={id} className="deleted-message">
           {deletedMessage[id]}
@@ -80,7 +80,7 @@ export const UserProfile = () => {
           <div className="bill-container">
             <div className="bill-sub-container">
               <h4>Pre-Bill:</h4>
-              <p>${elem.bill}</p>
+              <p>${formatNumberWithCommas(elem.bill)}</p>
             </div>
 
             <div className="bill-sub-container">
@@ -99,7 +99,7 @@ export const UserProfile = () => {
 
             <div className="bill-sub-container">
               <h4>HST:</h4>
-              <p>{elem.HST == 0 ? 'NONE' : elem.HST + '%'}</p>
+              <p>{elem.HST == 0 ? 'NONE' : '$'+elem.HST}</p>
             </div>
           </div>
 

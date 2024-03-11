@@ -44,7 +44,7 @@ export const ProUserLayout = () => {
             </div>
             
             <div className="logo-container">
-                <h1 className='logo'>SPLI-<br/>-TTER</h1>
+                <h1 className='logo'>SPLI<br/>TTER</h1>
             </div>
             {successMessage && <p className='success-saved-calculation'>{successMessage}</p>}
             {token ? <Outlet/> : <Navigate to='/'/>}    

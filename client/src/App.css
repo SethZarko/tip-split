@@ -541,6 +541,7 @@ main nav img {
     flex-direction: column;
 }
 
+
 .display-row-text-container p {
     font-family: 'Nanum Gothic Coding', sans-serif;
     font-weight: 700;
@@ -860,6 +861,11 @@ main nav img {
   .bill-people-sub-container p {
     align-self: start;
   }
+
+  .no-saved-calculations {
+    background: rgb(240, 240, 240);
+    padding: .65em 1.25em;
+  }
   
 /* Media Queries */
 
@@ -912,7 +918,7 @@ main nav img {
 
 
     .display-row h3 {
-        font-size: 2.25rem;
+        font-size: 2rem;
     }
 
     .display-container button {

@@ -216,7 +216,7 @@ export const AppProvider = ({ children }) => {
       hstOnBill = 0
     }
     let roundedHST = Math.round(hstOnBill * 100) / 100
-    setHST(roundedHST)
+    setHST(formatNumberWithCommas(roundedHST))
 
     if(gratuity) {
       tipPercent = 0.18
@@ -247,7 +247,7 @@ export const AppProvider = ({ children }) => {
     if(isNaN(roundedTotalBill)) {
       roundedTotalBill = 0;
     }
-    setFinalTotalBill(roundedTotalBill)
+    setFinalTotalBill(formatNumberWithCommas(roundedTotalBill))
   };
 
   useEffect(() => {
@@ -343,7 +343,8 @@ export const AppProvider = ({ children }) => {
     setGrauityFormData,
     setSelectGratuity,
     handleGratuityClick,
-    setCustomText
+    setCustomText,
+    formatNumberWithCommas
   };
 
   // Return Context
