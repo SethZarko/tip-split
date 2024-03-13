@@ -1,6 +1,7 @@
 export const corsOptions = {
     origin: [
         'https://tip-split.onrender.com',
+        'https://tip-split-1.onrender.com/',
         'http://localhost:3000',
         'https://www.getpostman.com'
     
