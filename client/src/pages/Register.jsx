@@ -9,9 +9,14 @@ export const Register = () => {
   const { navigateToLogin, setNavigateToLogin } = useAppContext();
 
   const [errors, setErrors] = useState(null);
+  const [passRules, setPassRules] = useState(false)
 
   const emailRef = useRef();
   const passwordRef = useRef();
+
+  const handlePassRulesToggle = () => {
+    setPassRules((prev) => !prev)
+  }
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -55,11 +60,21 @@ export const Register = () => {
         <li><i className="fa-solid fa-check"></i><p>Select Gratuity Option</p></li>
         <li><i className="fa-solid fa-check"></i><p>Calculate the Total Bill</p></li>
         <li><i className="fa-solid fa-check"></i><p>And Much More!!</p></li>
-        
-        <li><p></p></li>
-        <li><p></p></li>
       </ul>
     </div>
+    
+    <button onClick={handlePassRulesToggle}>{!passRules ? 'Show Password Rules' : 'Hide Password Rules'}</button>
+    {passRules && <div className="go-pro-container">
+      <h2>Password Rules</h2>
+      <br />
+      <ul>
+        <li><i className="fa-solid fa-check"></i><p>Password must be at least 8 characters long and no more than 12 characters</p></li>
+        <li><i className="fa-solid fa-check"></i><p>Password must contain at least one digit</p></li>
+        <li><i className="fa-solid fa-check"></i><p>Password must contain at least one lowercase letter</p></li>
+        <li><i className="fa-solid fa-check"></i><p>Password must contain at least one uppercase letter</p></li>
+        <li><i className="fa-solid fa-check"></i><p>Password must contain at least one special character</p></li>
+      </ul>
+    </div>}
       <form className="register-form" onSubmit={handleForm}>
         <h1 className="title">Register</h1>
 
