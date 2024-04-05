@@ -5,13 +5,12 @@ import axiosClientLogin from '../axiosClient.js'
 
 import { useAppContext } from '../context/AppProvider'
 
-// https://tip-split.onrender.com
 export const ProUserLayout = () => {
     const { token, user, setUser, successMessage } = useAppContext()
 
     useEffect(() => {
         if (token !== null) {
-            axiosClientLogin.get('http://localhost:8000/api/admin/all')
+            axiosClientLogin.get('https://https://tip-split.onrender.com/api/admin/all')
             .then(({ data }) => {
                 data.map((elem) => {
                     setUser(elem.email)

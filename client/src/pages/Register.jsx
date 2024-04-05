@@ -5,8 +5,6 @@ import { useAppContext } from '../context/AppProvider.jsx';
 
 import axiosClientLogin from '../axiosClient.js';
 
-//tip-split.onrender.com
-
 export const Register = () => {
   const { navigateToLogin, setNavigateToLogin } = useAppContext();
 
@@ -29,7 +27,7 @@ export const Register = () => {
     };
 
     axiosClientLogin
-      .post('http://localhost:8000/api/admin/create', payload)
+      .post('https://tip-split.onrender.com/api/admin/create', payload)
       .then(({ data }) => {
         if (data) {
           emailRef.current.value = '';

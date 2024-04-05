@@ -279,9 +279,7 @@ export const AppProvider = ({ children }) => {
   const handleSaveCalculation = async (e) => {
     e.preventDefault()
 
-    // tip-split.onrender.com
-
-    await axiosClientLogin.post('http://localhost:8000/api/calc/create', {
+    await axiosClientLogin.post('https://tip-split.onrender.com/api/calc/create', {
         bill,
         tipFormData,
         gratuityFormData,
