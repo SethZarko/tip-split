@@ -1,9 +1,7 @@
 import axios from 'axios'
 
 // Login ProUser
-export const axiosClientLogin = axios.create({
-    withCredentials: true
-})
+export const axiosClientLogin = axios.create()
 
 axiosClientLogin.interceptors.request.use((config) => {
     const token = localStorage.getItem('ACCESS_TOKEN')

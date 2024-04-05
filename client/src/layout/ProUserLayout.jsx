@@ -10,7 +10,7 @@ export const ProUserLayout = () => {
 
     useEffect(() => {
         if (token !== null) {
-            axiosClientLogin.get('https://https://tip-split.onrender.com/api/admin/all')
+            axiosClientLogin.get('https://tip-split.onrender.com/api/admin/all')
             .then(({ data }) => {
                 data.map((elem) => {
                     setUser(elem.email)
