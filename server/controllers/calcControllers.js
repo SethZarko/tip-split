@@ -9,7 +9,7 @@ import { isValidObjectId } from '../validation/isValidID.js'
 // contact Create Controller
 export const calcCreateController = async (req, res, next) => {
     const { bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill } = req.body
-    
+
     try {
 
         // Validation Error Check
@@ -19,7 +19,7 @@ export const calcCreateController = async (req, res, next) => {
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const calculator = await Calculator.createCalculation(bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill)
+        const calculator = await Calculator.createCalculation(req, bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill)
     
         return res.status(201).json(calculator)
 
@@ -32,7 +32,7 @@ export const calcCreateController = async (req, res, next) => {
 // contact Get All Controller
 export const calcGetAllController = async (req, res, next) => {
     try {
-        const calculations = await Calculator.findAllCalculations()
+        const calculations = await Calculator.findAllCalculations(req)
 
         return res.status(200).json(calculations)
     
@@ -60,7 +60,7 @@ export const calcDeleteController = async (req, res, next) => {
             })
         }
 
-        await Calculator.deleteCalculation(id)
+        await Calculator.deleteCalculation(id, req)
     
         return res.status(200).json({ message: 'Saved Calculation Deleted'})
 

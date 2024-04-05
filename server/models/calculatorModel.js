@@ -32,6 +32,11 @@ const calculatorSchmea = new Schema({
         type: String,
         required: true
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Admin'
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -42,13 +47,21 @@ const calculatorSchmea = new Schema({
 // ---- Mongoose Statics ---- //
 
 //Save to Database
-calculatorSchmea.statics.createCalculation = async function(bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill) {
+calculatorSchmea.statics.createCalculation = async function(req, bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill) {
     
     try {
 
-        // Create and Save New User
+        // Create and Save New Calculation
         const query = {
-            bill, tipFormData, gratuityFormData, people, HST, finalDisplayTip, finalDisplayTotal, finalTotalBill
+            bill: bill, 
+            tipFormData: tipFormData, 
+            gratuityFormData: gratuityFormData, 
+            people: people, 
+            HST: HST, 
+            finalDisplayTip: finalDisplayTip, 
+            finalDisplayTotal: finalDisplayTotal, 
+            finalTotalBill: finalTotalBill,
+            user: req.user.id
         }
 
         const calculation = new this(query)
@@ -61,10 +74,10 @@ calculatorSchmea.statics.createCalculation = async function(bill, tipFormData, g
 };
 
 // Get All From Database
-calculatorSchmea.statics.findAllCalculations = async function() {
+calculatorSchmea.statics.findAllCalculations = async function(req) {
 
     try {
-        const calculations = await this.find({})
+        const calculations = await this.find({ user: req.user.id })
 
         // Existing Check
         if(calculations.length === 0) {
@@ -80,12 +93,11 @@ calculatorSchmea.statics.findAllCalculations = async function() {
 
 
 // Delete From Database
-calculatorSchmea.statics.deleteCalculation = async function(id) {
-
+calculatorSchmea.statics.deleteCalculation = async function(id, req) {
     try {
 
         // Existing User Check
-        const calculation = await this.findById(id);
+        const calculation = await this.find({ user: req.user.id });
 
         if(!calculation) {
             throw Error('This Entry Does Not Exist')

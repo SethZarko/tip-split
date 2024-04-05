@@ -19,6 +19,7 @@ const adminSchmea = new Schema({
 
 // Apply the hashPassword function as a pre-save hook
 adminSchmea.pre('save', hashPassword);
+adminSchmea.pre('updateOne', hashPassword);
 
 
 // ---- Mongoose Statics ---- //
@@ -26,6 +27,11 @@ adminSchmea.pre('save', hashPassword);
 //Save User to Database
 adminSchmea.statics.createAdmin = async function(email, password) {
     try {
+        
+        // Input Check
+         if(!email || !password) {
+            throw Error('All Fields Required')
+        }
 
         // Existing User Check
         const exists = await this.findOne({ email })
@@ -50,10 +56,16 @@ adminSchmea.statics.createAdmin = async function(email, password) {
 };
 
 // Get All Users From Database
-adminSchmea.statics.findAllAdmin = async function() {
+adminSchmea.statics.findAllAdmin = async function(req, res) {
 
     try {
-        const users = await this.find({})
+
+        if(req.user.id === null){
+            res.status(400)
+            throw Error('Please Provide Valid Credentials')
+        }
+
+        const users = await this.find({ _id: req.user.id }).select('-password')
 
         // Users Check
         if(users.length === 0) {
@@ -69,11 +81,11 @@ adminSchmea.statics.findAllAdmin = async function() {
 
 
 // Update User In Database
-adminSchmea.statics.updateAdmin = async function(id, email, password) {
+adminSchmea.statics.updateAdmin = async function(req, email, password) {
 
     try {
 
-        const user = await this.findById(id);
+        const user = await this.findById({ _id: req.user.id });
 
         // User Check
         if (!user) {
@@ -87,7 +99,7 @@ adminSchmea.statics.updateAdmin = async function(id, email, password) {
 
         // Update User Data
         const updated = await user.set(query);
-        await updated.save();
+        await this.updateOne(updated);
 
         return updated;
 
@@ -97,12 +109,12 @@ adminSchmea.statics.updateAdmin = async function(id, email, password) {
 }
 
 // Delete User From Database
-adminSchmea.statics.deleteAdmin = async function(id) {
+adminSchmea.statics.deleteAdmin = async function(req) {
 
     try {
 
         // Existing User Check
-        const user = await this.findById(id);
+        const user = await this.findById({ _id: req.user.id });
 
         if(!user) {
             throw Error('User Does Not Exist')

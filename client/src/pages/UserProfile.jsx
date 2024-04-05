@@ -25,12 +25,11 @@ export const UserProfile = () => {
   }, [token]);
 
   const handleDeleteCalculation = (id) => {
-    const deletedCalcID = savedFormData.filter((elem) => elem._id !== id);
-    setSavedFormData(deletedCalcID);
-
     axiosClientLogin
       .delete(`https://tip-split.onrender.com/api/calc/${id}`)
       .then((response) => {
+        const deletedCalcID = savedFormData.filter((elem) => elem._id !== id);
+        setSavedFormData(deletedCalcID);
         setDeletedMessage(response.data);
         setTimeout(() => {
           setDeletedMessage({});
