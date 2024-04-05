@@ -3,7 +3,7 @@ import { Router } from 'express'
 const router = Router()
 
 // Route Validation
-import { authenticateLoggedInAdmin } from '../auth/authenticateRoutes.js'
+import { protectRoute } from '../middleware/protectRoutes.js';
 import { calcValidation } from '../validation/routeValidation.js'
 
 // Controller Imports
@@ -17,13 +17,13 @@ import {
 // ---- CRUD ROUTES ---- //
 
 // POST /api/calc/create
-router.post('/create', calcValidation, authenticateLoggedInAdmin, calcCreateController)
+router.post('/create', calcValidation, protectRoute, calcCreateController)
 
 // GET /api/calc/all
-router.get('/all', authenticateLoggedInAdmin, calcGetAllController)
+router.get('/all', protectRoute, calcGetAllController)
 
 // DELETE /api/calc/:id
-router.delete('/:id', authenticateLoggedInAdmin, calcDeleteController)
+router.delete('/:id', protectRoute, calcDeleteController)
 
 
 export default router

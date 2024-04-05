@@ -4,6 +4,8 @@ import { useAppContext } from '../context/AppProvider';
 
 import { axiosClientLogin } from '../axiosClient.js';
 
+//tip-split.onrender.com
+
 export const UserProfile = () => {
   const { token, formatNumberWithCommas } = useAppContext();
 
@@ -13,7 +15,7 @@ export const UserProfile = () => {
   useEffect(() => {
     if (token !== null) {
       axiosClientLogin
-        .get('https://tip-split.onrender.com/api/calc/all')
+        .get('http://localhost:8000/api/calc/all')
         .then((response) => {
           const data = response.data;
           setSavedFormData(data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
@@ -25,12 +27,11 @@ export const UserProfile = () => {
   }, [token]);
 
   const handleDeleteCalculation = (id) => {
-    const deletedCalcID = savedFormData.filter((elem) => elem._id !== id);
-    setSavedFormData(deletedCalcID);
-
     axiosClientLogin
-      .delete(`https://tip-split.onrender.com/api/calc/${id}`)
+      .delete(`http://localhost:8000/api/calc/${id}`)
       .then((response) => {
+        const deletedCalcID = savedFormData.filter((elem) => elem._id !== id);
+        setSavedFormData(deletedCalcID);
         setDeletedMessage(response.data);
         setTimeout(() => {
           setDeletedMessage({});

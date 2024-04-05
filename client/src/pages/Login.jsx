@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/AppProvider';
 import { axiosClientLogin } from '../axiosClient.js';
 
+// tip-split.onrender.com
+
 export const Login = () => {
   const [errors, setErrors] = useState(null);
 
@@ -28,7 +30,7 @@ export const Login = () => {
     setErrors(null);
 
     axiosClientLogin
-      .post('https://tip-split.onrender.com/api/admin/auth/login', payload)
+      .post('http://localhost:8000/api/admin/auth/login', payload)
       .then(({ data }) => {
         setToken(data.token);
         setUser(data.user);

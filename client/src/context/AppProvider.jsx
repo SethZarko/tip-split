@@ -1,6 +1,7 @@
 // Imports
 import PropTypes from 'prop-types';
 import { createContext, useContext, useState, useEffect } from 'react';
+import { axiosClientLogin } from '../axiosClient.js';
 
 // Create Context
 const AppContext = createContext({
@@ -278,13 +279,9 @@ export const AppProvider = ({ children }) => {
   const handleSaveCalculation = async (e) => {
     e.preventDefault()
 
-    await fetch('https://tip-split.onrender.com/api/calc/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify({
+    // tip-split.onrender.com
+
+    await axiosClientLogin.post('http://localhost:8000/api/calc/create', {
         bill,
         tipFormData,
         gratuityFormData,
@@ -294,7 +291,7 @@ export const AppProvider = ({ children }) => {
         finalDisplayTotal,
         finalTotalBill
       })
-    }).then(() => {
+      .then(() => {
       resetCalculatorState()
       setSuccessMessage('Calculation Saved!');
       setTimeout(() => {

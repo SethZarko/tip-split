@@ -5,13 +5,13 @@ import axiosClientLogin from '../axiosClient.js'
 
 import { useAppContext } from '../context/AppProvider'
 
-
+// https://tip-split.onrender.com
 export const ProUserLayout = () => {
-    const { token, user, setUser, setToken, successMessage } = useAppContext()
+    const { token, user, setUser, successMessage } = useAppContext()
 
     useEffect(() => {
         if (token !== null) {
-            axiosClientLogin.get('https://tip-split.onrender.com/api/admin/all')
+            axiosClientLogin.get('http://localhost:8000/api/admin/all')
             .then(({ data }) => {
                 data.map((elem) => {
                     setUser(elem.email)
@@ -20,16 +20,6 @@ export const ProUserLayout = () => {
         }
     }, [token])
 
-    const onLogout = (e) => {
-        e.preventDefault()
-
-        axiosClientLogin.post('https://tip-split.onrender.com/api/admin/auth/logout')
-            .then(() => {
-                setUser([])
-                setToken(null)
-            })
-    }
-
     return (
         <main>
             <div className="user-info-container">
@@ -37,7 +27,6 @@ export const ProUserLayout = () => {
 
                 <div className="user-info-btn-container">
                     <Link to='/pro/profile' className='btn-logout'>Profile</Link>
-                    <button href="#" onClick={onLogout} className='btn-logout'>Logout</button>
                 </div>
 
               

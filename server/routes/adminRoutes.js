@@ -3,13 +3,12 @@ import { Router } from 'express'
 const router = Router()
 
 // Route Validation
-import { authenticateLoggedInAdmin } from '../auth/authenticateRoutes.js'
+import { protectRoute } from '../middleware/protectRoutes.js';
 import { loginValidation, adminCreateValidation } from '../validation/routeValidation.js'
 
 // Controller Imports
 import { 
     adminLoginController, 
-    adminLogoutController, 
     adminCreateController,
     adminGetAllController,
     adminUpdateController,
@@ -22,13 +21,13 @@ import {
 router.post('/create', adminCreateValidation, adminCreateController)
 
 // GET /api/admin/all
-router.get('/all', authenticateLoggedInAdmin, adminGetAllController)
+router.get('/all', protectRoute, adminGetAllController)
 
 // PUT /api/admin/:id
-router.put('/:id', authenticateLoggedInAdmin, adminUpdateController)
+router.put('/:id', protectRoute, adminUpdateController)
 
 // DELETE /api/admin/:id
-router.delete('/:id', authenticateLoggedInAdmin, adminDeleteController)
+router.delete('/:id', protectRoute, adminDeleteController)
 
 
 // ---- AUTH ROUTES ---- //
@@ -36,7 +35,5 @@ router.delete('/:id', authenticateLoggedInAdmin, adminDeleteController)
 // POST /api/admin/auth/login
 router.post('/auth/login', loginValidation, adminLoginController)
 
-// POST /api/admin/auth/logout
-router.post('/auth/logout', authenticateLoggedInAdmin, adminLogoutController)
 
 export default router
